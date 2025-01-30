@@ -11,11 +11,19 @@ const {
 
 const router = express.Router();
 
-router.get("/", getAllTasks);
-router.get("/create", getCreateTaskPage);
-router.post("/create", validateTask, createTask);
-router.get("/:id", getTaskById);
-router.patch("/:id", validateTask, updateTask);
-router.delete("/:id", deleteTask);
+router
+  .route("/")
+  .get(getAllTasks);
+
+router
+  .route("/create")
+  .get(getCreateTaskPage)
+  .post(validateTask, createTask);
+
+router
+  .route("/:id")
+  .get(getTaskById)
+  .patch(validateTask, updateTask)
+  .delete(deleteTask);
 
 module.exports = router;
