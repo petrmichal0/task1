@@ -4,6 +4,8 @@ const { validateDateQuery } = require("../validators/dateValidator");
 
 const router = express.Router();
 
-router.get("/", validateDateQuery, getCurrentDate);
+router
+  .route("/")
+  .get(validateDateQuery, getCurrentDate);
 
 module.exports = router;
