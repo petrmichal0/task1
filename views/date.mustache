@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date Calculator</title>
+  <link rel="stylesheet" href="/global.css">
+  <link rel="stylesheet" href="/date.css">
+</head>
+<body>
+<div class="container">
+  <h1>Kalkulátor data</h1>
+  
+  {{#date}}
+  <p class="calculated-date"><strong>{{date}}</strong></p>
+  {{/date}}
+
+  <div class="form-group">
+    <label for="numberOfday">
+      <span class="description">Zadejte počet dnů (-365 až 365):</span>
+      <span class="description">(Kladné číslo pro posun do budoucna, záporné do minulosti)</span>
+    </label>
+    <input type="number" name="numberOfday" id="numberOfday">
+  </div>
+
+  <div class="buttons">
+    <button onclick="calculateDate()" class="button-link">Vypočítat</button>
+    <button onclick="resetDate()" class="reset-button">Reset na dnešek</button>
+    
+  </div>
+
+  <h2>Historie změn</h2>
+  <ul>
+    {{#history}}
+      <li>{{.}}</li>
+    {{/history}}
+  </ul>
+
+  <h2>Záznam změn</h2>
+  <p><strong>Přidáno:</strong> {{#added}}<span class="added">{{.}}</span> {{/added}}</p>
+  <p><strong>Odstraněno:</strong> {{#removed}}<span class="removed">{{.}}</span> {{/removed}}</p>
+
+  <div class="buttons">
+    <a href="/" class="back-button">⟵ Zpět na Dashboard</a>
+  </div>
+</div>
+
+<script>
+  async function calculateDate() {
+    const numberOfDays = document.getElementById("numberOfday").value;
+
+    if (!numberOfDays || isNaN(numberOfDays) || numberOfDays < -365 || numberOfDays > 365) {
+      alert("⚠️ Prosím, zadejte platné číslo v rozmezí -365 až 365!");
+      return;
+    }
+
+    try {
+      const response = await fetch(`/date?numberOfday=${numberOfDays}`);
+
+       if (!response.ok) {
+        const errorText = await response.text(); 
+        alert(`❌ Chyba: ${errorText}`);
+        return;
+      }
+
+      const result = await response.text();
+      document.body.innerHTML = result;
+      history.pushState({}, "", `/date?numberOfday=${numberOfDays}`);
+    } catch (err) {
+      console.error("❌ Chyba při komunikaci se serverem:", err);
+      alert("❌ Nastala chyba při zpracování požadavku.");
+    }
+  }
+
+  function resetDate() {
+    window.location.href = "/date?reset=true"; 
+  }
+</script>
+</body>
+</html>

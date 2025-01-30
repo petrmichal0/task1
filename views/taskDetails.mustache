@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aktualizace úkolu</title>
+  <link rel="stylesheet" href="/global.css">
+  <link rel="stylesheet" href="/taskDetails.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Aktualizace úkolu</h1>
+
+    <!-- Formulářové prvky -->
+    <div class="form-group">
+      <label for="title">Název:</label>
+      <textarea id="title" name="title" rows="2" required>{{task.title}}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="status">Stav:</label>
+        <select id="status" name="status" required>
+          <option value="nový" {{#task.isNew}}selected{{/task.isNew}}>Nový</option>
+          <option value="v řešení" {{#task.isInProgress}}selected{{/task.isInProgress}}>V řešení</option>
+          <option value="hotovo" {{#task.isDone}}selected{{/task.isDone}}>Hotovo</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+      <label for="dueDate">Vytvořeno:</label>
+      <input type="date" id="dueDate" name="dueDate" value="{{task.dueDate}}" required>
+    </div>
+
+    <div class="buttons">
+      <button class="update-button" onClick="saveChanges()">Uložit změny</button>
+      <a href="/tasks" class="back-button">⟵ Zpět na seznam úkolů</a>
+    </div>
+  </div>
+
+<script>
+    async function saveChanges() {
+        const taskId = "{{task.id}}"; // ID úkolu
+        const title = document.getElementById("title").value.trim(); // Hodnota z textarea
+        const status = document.getElementById("status").value; // Hodnota ze statusu
+        const dueDate = document.getElementById("dueDate").value; // Hodnota z dueDate
+
+        if (!title) {
+          alert("⚠️ Název úkolu nesmí být prázdný!");
+          return;
+        }
+
+        try {
+            const response = await fetch(`/tasks/${taskId}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title, status, dueDate }),
+            });
+
+            if (response.ok) {
+                alert("✅ Změny byly úspěšně uloženy!");
+                window.location.href = "/tasks";
+            } else {
+                const errorData = await response.json();
+                alert(`❌ Chyba při ukládání: ${errorData.message || "Nastala neznámá chyba."}`);
+            }
+        } catch (err) {
+            alert(`❌ Chyba při odesílání požadavku: ${err.message}`);
+        }
+    }
+</script>
+
+</body>
+</html>

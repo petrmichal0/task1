@@ -1,0 +1,91 @@
+[
+  {
+    "id": 1737405613533,
+    "title": "Dokončit dokumentaci 2",
+    "description": "Sepsat a upravit veškerou dokumentaci k projektu, včetně popisu API endpointů.",
+    "dueDate": "2025-02-15",
+    "status": "v řešení"
+  },
+  {
+    "id": 1737407105733,
+    "title": "Opravit chybu ve validaci",
+    "description": "Zjistit a opravit chybu v validaci vstupních dat u endpointu pro vytváření úkolů.",
+    "dueDate": "2025-03-10",
+    "status": "v řešení"
+  },
+  {
+    "id": 1737407115733,
+    "title": "Implementovat Mustache šablony",
+    "description": "Přidat a optimalizovat Mustache šablony pro jednotlivé stránky aplikace.",
+    "dueDate": "2025-06-25",
+    "status": "v řešení"
+  },
+  {
+    "id": 1737753397000,
+    "title": "Přidat validaci pro datum",
+    "description": "Zajistit, aby datum úkolu nemohlo být zadáno mimo povolené rozmezí.",
+    "dueDate": "2025-02-05",
+    "status": "nový"
+  },
+  {
+    "id": 1737754145219,
+    "title": "Optimalizace SQL dotazů",
+    "description": "Zkontrolovat a optimalizovat SQL dotazy pro lepší výkon aplikace.",
+    "dueDate": "2025-04-20",
+    "status": "nový"
+  },
+  {
+    "id": 1737754160536,
+    "title": "Testování API pomocí Postmanu",
+    "description": "Vytvořit a provést testovací scénáře pro API pomocí Postmanu.",
+    "dueDate": "2025-05-10",
+    "status": "nový"
+  },
+  {
+    "id": 1737754162965,
+    "title": "Přidat logování chyb",
+    "description": "Implementovat lepší logování chyb pro snazší ladění backendu.",
+    "dueDate": "2025-07-30",
+    "status": "v řešení"
+  },
+  {
+    "id": 1737754165804,
+    "title": "Vytvořit testovací datad",
+    "description": "Připravit testovací dataset pro ověření správné funkčnosti aplikace.",
+    "dueDate": "2025-08-12",
+    "status": "nový"
+  },
+  {
+    "id": 1737754178306,
+    "title": "Přidat možnost editace úkolu",
+    "description": "Umožnit uživatelům upravovat existující úkoly přímo v aplikaci.",
+    "dueDate": "2025-09-18",
+    "status": "nový"
+  },
+  {
+    "id": 1737754202546,
+    "title": "Zabezpečit API pomocí CORS",
+    "description": "Nastavit správné CORS hlavičky pro ochranu API před neoprávněným přístupem.",
+    "dueDate": "2025-10-15",
+    "status": "nový"
+  },
+  {
+    "id": 1738183487203,
+    "title": "Upravit styly aplikace",
+    "description": "Zkontrolovat a sjednotit CSS styly pro lepší vizuální vzhled aplikace.",
+    "dueDate": "2025-11-25",
+    "status": "nový"
+  },
+  {
+    "id": 1738198975988,
+    "title": "45454",
+    "status": "nový",
+    "dueDate": "2025-01-30"
+  },
+  {
+    "id": 1738199195602,
+    "title": "123",
+    "status": "nový",
+    "dueDate": "2025-01-30"
+  }
+]

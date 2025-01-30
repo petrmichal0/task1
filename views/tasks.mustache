@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Úkoly</title>
+  <link rel="stylesheet" href="/global.css">
+  <link rel="stylesheet" href="/tasks.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Seznam úkolů</h1>         
+        <div class="buttons">
+            <a href="/tasks/create" class="button-link">Vytvořit úkol</a>
+        </div>
+        <div>
+            <div class="table-header">
+                <div>Vytvořeno</div>
+                <div>Stav</div>
+                <div>Název</div>
+                <div>Akce</div>
+            </div>
+            <div class="table-container">
+                {{#tasks}}
+                <div class="table-row">
+                    <div>{{dueDate}}</div>
+                    <div>{{status}}</div>
+                    <div>{{title}}</div>
+                    <div class="actions">
+                        <a href="/tasks/{{id}}" class="update-button">Aktualizovat</a>
+                        <button class="delete-button" onclick="deleteTask({{id}})">Smazat</button>
+                    </div>
+                </div>
+                {{/tasks}}  
+            </div>
+        </div>
+        <div class="buttons">
+            <a href="/" class="back-button">⟵ Zpět na hlavní stránku</a>
+        </div>
+    </div>
+
+    <script>
+    async function deleteTask(taskId) {
+        if (confirm("❌ Opravdu chcete tento úkol smazat?")) {
+            try {
+                const response = await fetch(`/tasks/${taskId}`, {
+                    method: "DELETE",
+                });
+
+                if (response.ok) {
+                    alert("✅ Úkol byl úspěšně smazán.");
+                    window.location.reload();
+                } else {
+                    const errorData = await response.json();
+                    alert(`❌ Chyba při mazání úkolu: ${errorData.message}`);
+                }
+            } catch (err) {
+                alert(`❌ Nepodařilo se připojit k serveru: ${err.message}`);
+            }
+        }
+    }
+    </script>
+</body>
+</html>

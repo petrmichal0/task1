@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vytvoření nového úkolu</title>
+  <link rel="stylesheet" href="/global.css">
+  <link rel="stylesheet" href="/createTask.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Vytvořit nový úkol</h1>
+    
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <textarea id="title" name="title" rows="2" required></textarea>
+    </div>
+
+    <div class="buttons">
+      <button class="create-button" onclick="createTask()">Vytvořit úkol</button>
+      <a href="/tasks" class="back-button">⟵ Zpět na seznam úkolů</a>
+    </div>
+  </div>
+
+<script>
+  async function createTask() {
+    const title = document.getElementById("title").value.trim();
+
+
+    if (!title) {
+      alert("⚠️ Název úkolu je povinný!");
+      return;
+    }
+
+    try {    
+      const response = await fetch("/tasks/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title }),
+      });
+
+      if (response.ok) {
+        alert("✅ Úkol byl úspěšně vytvořen!");
+        window.location.href = "/tasks"; 
+      } else {
+        const errorData = await response.json();
+        alert(`❌ Chyba: ${errorData.message || "Došlo k chybě při vytváření úkolu."}`);
+      }
+    } catch (err) {
+      alert("❌ Došlo k neočekávané chybě. Zkuste to znovu.");
+      console.error("Runtime chyba:", err.message);
+    }
+  }
+</script>
+</body>
+</html>

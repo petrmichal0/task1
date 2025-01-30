@@ -1,0 +1,22 @@
+.calculated-date {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.form-group input {
+  max-width: 100px;
+  text-align: center;
+}
+
+.buttons {
+  justify-content: space-between;
+}
+
+.description {
+  display: block;
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 4px;
+}
