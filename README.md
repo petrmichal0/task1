@@ -26,7 +26,6 @@ Backend aplikace pro správu úkolů je serverová aplikace napsaná v Node.js, 
 - [Struktura projektu](#struktura-projektu)
 - [Použité technologie](#použité-technologie)
 - [Knihovny třetích stran](#knihovny-třetích-stran)
-- [Licence](#licence)
 
 ## Funkce
 - Správa úkolů (vytváření, aktualizace, mazání a zobrazení úkolů)
